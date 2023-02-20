@@ -3,11 +3,10 @@ import {Link} from 'react-router-dom'
 
 const Navbar = () => {
     return (
-        <div>
             <nav className="navbar bg-dark">
                 <h1>
                     <Link to="index">
-                        <i className="fas fa-code"></i> DevConnector
+                        <i className="fas fa-code"/> DevConnector
                     </Link>
                 </h1>
                 <ul>
@@ -16,7 +15,6 @@ const Navbar = () => {
                     <li><Link to="login">Login</Link></li>
                 </ul>
             </nav>
-        </div>
     );
 };
 
