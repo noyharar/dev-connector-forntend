@@ -1,40 +1,34 @@
 import React, {Fragment, useState} from 'react';
-import {Link} from "react-router-dom";
-import { connect } from 'react-redux';
+import {Link, Navigate} from "react-router-dom";
+import {connect} from 'react-redux';
 import {setAlert} from "../../actions/alert";
-import {useDispatch } from 'react-redux'
-import AlertMessage from "../layout/AlertMessage";
+import {register} from "../../actions/auth"
+import PropTypes from 'prop-types';
 
-const Register = () => {
+ const Register = ({ setAlert, register, isAuthenticated }) => {
     const [formData, setFormData] = useState({
         name:'',
         email: '',
         password: '',
         password2: ''
     });
-    const [alertMessage,setAlertMessage] = useState(null);
     const { name, email, password, password2} = formData;
-
-    const dispatch = useDispatch();
 
     const onChange = e => setFormData({...formData, [e.target.name]: e.target.value});
 
     const onSubmit =  e => {
         e.preventDefault();
         if(password !== password2){
-            setAlertMessage('Passwords dont match');
-            // dispatch(setAlert("Passwords dont match", 'danger'))
-            // console.log('Passwords dont match');
+            setAlert('Passwords do not match', 'danger');
         }else{
-            setAlertMessage(null);
-
-            //register
-
+            register({name,email,password})
         }
     };
+    if(isAuthenticated){
+        return <Navigate to="/dashboard"/>
+    }
 
     return <Fragment>
-        {alertMessage && <AlertMessage variant='danger'>{alertMessage}</AlertMessage>}
         <h1 className="large text-primary">Sign Up</h1>
         <p className="lead">
             <i className="fas fa-user"> </i> Create Your Account
@@ -57,9 +51,22 @@ const Register = () => {
             <input type="submit" className="btn btn-primary"  value="Register"/>
         </form>
         <p className="my-1"> Already have an account?
-            <Link to="login">Sign In</Link>
+            <Link to="/login">Sign In</Link>
         </p>
     </Fragment>
 };
 
-export default Register;
+Register.propTypes = {
+    setAlert: PropTypes.func.isRequired,
+    register: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool
+};
+
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(
+    mapStateToProps,
+    { setAlert, register }
+)(Register);
