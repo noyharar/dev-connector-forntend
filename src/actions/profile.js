@@ -12,7 +12,7 @@ import {setAlert} from "./alert";
 export const getCurrentProfile =  () => async (dispatch) => {
     try {
         const res = await axios.get('http://localhost:5000/api/profile/me');
-
+        console.log("noy" + res.data.experience[0])
         dispatch({
             type: GET_PROFILE,
             payload: res.data
@@ -71,8 +71,10 @@ export const addExperience =  (formData, history) => async (dispatch) => {
             payload: res.data
         });
         dispatch(setAlert("Experience added", 'success'));
-        return history.push('/dashboard')
+
+        history.push("/dashboard")
     } catch (err) {
+        console.log(err);
         const errors = err.response.data.errors;
 
         if (errors) {
