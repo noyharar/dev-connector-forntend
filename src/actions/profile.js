@@ -1,6 +1,6 @@
 import {
     GET_PROFILE,
-    PROFILE_ERROR
+    PROFILE_ERROR,
 } from "../actions/types";
 import axios from 'axios';
 

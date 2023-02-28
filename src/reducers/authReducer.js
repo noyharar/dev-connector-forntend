@@ -6,6 +6,7 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
+    CLEAR_PROFILE
 } from "../actions/types";
 
 const initialState = {
@@ -35,6 +36,7 @@ function authReducer(state = initialState, action) {
                 isAuthenticated: true,
                 loading: false
             };
+
         case REGISTER_FAIL:
         case LOGIN_FAIL:
         case AUTH_ERROR:
