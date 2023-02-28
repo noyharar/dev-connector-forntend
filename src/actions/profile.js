@@ -2,7 +2,7 @@ import {
     GET_PROFILE,
     PROFILE_ERROR
 } from "../actions/types";
-import {Axios as axios} from "axios";
+import axios from 'axios';
 
 
 // Get current Profile

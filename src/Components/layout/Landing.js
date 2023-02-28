@@ -2,11 +2,13 @@ import React from 'react';
 import {Link} from 'react-router-dom'
 import {connect} from "react-redux";
 import PropTypes from 'prop-types'
-// import {Navigate} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 
 const Landing = (isAuthenticated) => {
-    if(isAuthenticated){
-        // <Navigate to='/dashboard'/>
+    if(isAuthenticated.isAuthenticated != null && isAuthenticated.isAuthenticated === true){
+        console.log("blabla")
+        console.log(isAuthenticated)
+        return <Navigate to='/dashboard'/>
     }
     return (
         <section className="landing">

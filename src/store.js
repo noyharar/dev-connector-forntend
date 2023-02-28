@@ -13,6 +13,11 @@ const rootReducer = combineReducers({
     profile: profileReducer
 });
 
-const store = createStore(rootReducer,initialState,composeWithDevTools(applyMiddleware(...middleware)));
+const store = createStore(
+    rootReducer,
+    initialState,
+    composeWithDevTools(applyMiddleware(...middleware))
+);
 
-export default store
+export default store;
+
