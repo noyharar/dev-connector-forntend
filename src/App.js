@@ -16,6 +16,9 @@ import Alert from "./Components/layout/Alert";
 import PrivateRoute from "./Components/routing/PrivateRoute";
 import Dashboard from "./Components/dashboard/Dashboard";
 import CreateProfile from "./Components/profile-forms/CreateProfile";
+import EditProfile from "./Components/profile-forms/EditProfile";
+import AddExperience from "./Components/profile-forms/AddExperience";
+import AddEducation from "./Components/profile-forms/AddEducation";
 
 if (localStorage.token) {
     setAuthToken(localStorage.token);
@@ -29,22 +32,37 @@ const App = () => {
     return (
         <Provider store={store}>
             <Router>
-                <Alert />
                 <Navbar/>
+                <Alert />
                 <Routes>
                     <Route exact path='/' element={<Landing/>} />
                     <Route exact path='/register' element={<Register/>} />
                     <Route exact path='/login' element={<Login/>} />
-                    <Route exact path='/dashboard' element={<Dashboard/>} />
-                    <Route exact path='/create-profile' element={<CreateProfile/>} />
+                    {/*<Route exact path='/dashboard' element={<Dashboard/>} />*/}
+                    {/*<Route exact path='/create-profile' element={<CreateProfile/>} />*/}
+                    {/*<Route exact path='/edit-profile' element={<EditProfile/>} />*/}
+                    {/*<Route exact path='/add-experience' element={<AddExperience/>} />*/}
+                    {/*<Route exact path='/add-education' element={<AddEducation/>} />*/}
                     <Route
                         path="/dashboard"
                         element={<PrivateRoute component={Dashboard} />}
                     />
-                    {/*<Route*/}
-                    {/*    path='/create-profile'*/}
-                    {/*    element={<PrivateRoute component={CreateProfile} />}*/}
-                    {/*/>*/}
+                    <Route
+                        path='/create-profile'
+                        element={<PrivateRoute component={CreateProfile} />}
+                    />
+                    <Route
+                        path='/edit-profile'
+                        element={<PrivateRoute component={EditProfile} />}
+                    />
+                    <Route
+                        path='/add-experience'
+                        element={<PrivateRoute component={AddExperience} />}
+                    />
+                    <Route
+                        path='/add-education'
+                        element={<PrivateRoute component={AddEducation} />}
+                    />
                 </Routes>
             </Router>
         </Provider>
