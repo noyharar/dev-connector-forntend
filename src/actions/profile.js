@@ -88,8 +88,7 @@ export const createProfile =  (formData, history, edit=false) => async (dispatch
                 'Content-Type': 'application/json'
             }
         };
-        const res = await axios.post('http://localhost:5000/api/profile',  formData,config);
-        console.log(res)
+        const res = await axios.post('/api/profile',  formData,config);
         dispatch({
             type: CREATE_PROFILE,
             payload: res.data
@@ -112,7 +111,7 @@ export const createProfile =  (formData, history, edit=false) => async (dispatch
 };
 
 // Add experience
-export const addExperience =  (formData, history) => async (dispatch) => {
+export const addExperience =  (formData) => async (dispatch) => {
     try {
         const config = {
             headers: {

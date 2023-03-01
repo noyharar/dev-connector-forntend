@@ -1,8 +1,5 @@
-import React, {Fragment} from 'react';
-import {connect} from "react-redux";
+import React from 'react';
 import PropTypes from "prop-types";
-import {getCurrentProfile} from "../../actions/profile";
-import Spinner from "../layout/Spinner";
 import {Link} from "react-router-dom";
 
 const ProfileItem = ({

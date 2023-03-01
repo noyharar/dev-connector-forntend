@@ -61,7 +61,7 @@ const EditProfile = ({profile:{profile,loading}, createProfile ,getCurrentProfil
     const onSubmit = e => {
         e.preventDefault();
         createProfile(formData, history,true)
-    }
+    };
     return (
         <Fragment>
             <h1 className="large text-primary">
