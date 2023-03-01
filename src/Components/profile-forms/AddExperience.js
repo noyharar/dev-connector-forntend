@@ -1,11 +1,13 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, } from 'react';
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {addExperience} from "../../actions/profile";
 
 
-const AddExperience = ({addExperience, history}) =>{
+const AddExperience = ({addExperience}) =>{
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         company: '',
         title: '',
@@ -36,12 +38,12 @@ const AddExperience = ({addExperience, history}) =>{
                 Add An Experience
             </h1>
             <p className="lead">
-                <i className="fas fa-code-branch"></i> Add any developer/programming
+                <i className="fas fa-code-branch"/> Add any developer/programming
                 positions that you have had in the past
             </p>
             <small>* = required field</small>
             <form className="form" onSubmit={e => {e.preventDefault();
-            addExperience(formData,history)}}>
+            addExperience(formData).then(() => navigate('/dashboard'))}}>
                 <div className="form-group">
                     <input type="text" placeholder="* Job Title" name="title" value={title} onChange={e => onChange(e)} required/>
                 </div>

@@ -42,7 +42,7 @@ const CreateProfile = ({createProfile , history}) => {
     const onSubmit = e => {
         e.preventDefault();
         createProfile(formData, history)
-    }
+    };
     return (
         <Fragment>
                 <h1 className="large text-primary">

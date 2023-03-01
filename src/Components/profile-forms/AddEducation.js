@@ -1,11 +1,12 @@
 import React, {Fragment, useState} from 'react';
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {addEducation} from "../../actions/profile";
 
 
-const AddEducation = ({addEducation, history}) =>{
+const AddEducation = ({addEducation}) =>{
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         school: '',
         degree: '',
@@ -41,7 +42,8 @@ const AddEducation = ({addEducation, history}) =>{
             </p>
             <small>* = required field</small>
             <form className="form" onSubmit={e => {e.preventDefault();
-                addEducation(formData,history)}}>
+                addEducation(formData).then(() => navigate('/dashboard'));
+            }}>
                 <div className="form-group">
                     <input
                         type="text"

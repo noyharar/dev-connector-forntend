@@ -4,19 +4,72 @@ import {
     CREATE_PROFILE,
     UPDATE_PROFILE,
     CLEAR_PROFILE,
-    ACCOUNT_DELETED
+    ACCOUNT_DELETED,
+    GET_PROFILES,
+    GET_REPOS
 } from "../actions/types";
 import axios from 'axios';
 import {setAlert} from "./alert";
+
+
 
 
 // Get current Profile
 export const getCurrentProfile =  () => async (dispatch) => {
     try {
         const res = await axios.get('http://localhost:5000/api/profile/me');
-        console.log("noy" + res.data.experience[0])
         dispatch({
             type: GET_PROFILE,
+            payload: res.data
+        });
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status}
+        });
+    }
+};
+
+// Get Profile by id
+export const getProfileById =  (userId) => async (dispatch) => {
+    try {
+        const res = await axios.get(`http://localhost:5000/api/profile/user/${userId}`);
+        dispatch({
+            type: GET_PROFILE,
+            payload: res.data
+        });
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status}
+        });
+    }
+};
+
+// Get Github repos
+export const getGithubRepos =  (username) => async (dispatch) => {
+    try {
+        const res = await axios.get(`http://localhost:5000/api/profile/github/${username}`);
+        dispatch({
+            type: GET_REPOS,
+            payload: res.data
+        });
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status}
+        });
+    }
+};
+
+//Get all profiles
+export const getProfiles =  () => async (dispatch) => {
+    dispatch({type: CLEAR_PROFILE});
+
+    try {
+        const res = await axios.get('/api/profile');
+        dispatch({
+            type: GET_PROFILES,
             payload: res.data
         });
     } catch (err) {
@@ -72,8 +125,8 @@ export const addExperience =  (formData, history) => async (dispatch) => {
             payload: res.data
         });
         dispatch(setAlert("Experience added", 'success'));
-
-        history.push("/dashboard")
+        // history.push("/dashboard")
+        return res.data;
     } catch (err) {
         console.log(err);
         const errors = err.response.data.errors;
@@ -103,8 +156,10 @@ export const addEducation=  (formData, history) => async (dispatch) => {
             payload: res.data
         });
         dispatch(setAlert("Education added", 'success'));
-        history.push('/dashboard')
+        // history.push('/dashboard')
+        return res.data;
     } catch (err) {
+        console.log(err);
         const errors = err.response.data.errors;
 
         if (errors) {
