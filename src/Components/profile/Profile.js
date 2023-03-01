@@ -9,6 +9,7 @@ import ProfileAbout from "./ProfileAbout";
 import {useParams} from "react-router";
 import ProfileExp from "./ProfileExp";
 import ProfileEdu from "./ProfileEdu";
+import ProfileGithub from "./ProfileGithub";
 
 const Profile = ({
                      profile: {profile},
@@ -42,6 +43,7 @@ const Profile = ({
                         <ProfileAbout profile={profile} />
                         <ProfileExp experience={profile.experience} />
                         <ProfileEdu education={profile.education} />
+                        {profile.githubusername && (<ProfileGithub username={profile.githubusername}/>)}
                     </div>
                 </Fragment>
             )}
