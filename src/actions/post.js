@@ -6,7 +6,7 @@ import {
     DELETE_POST,
     CREATE_PROFILE,
     PROFILE_ERROR,
-    ADD_POST,
+    ADD_POST, REMOVE_COMMENT, ADD_COMMENT,
 } from "./types";
 import axios from 'axios';
 import {setAlert} from "./alert";
@@ -115,7 +115,60 @@ export const addPost =  (formData) => async (dispatch) => {
             errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
         }
         dispatch({
-            type: PROFILE_ERROR,
+            type: POST_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status}
+        });
+    }
+};
+
+
+// Add comment
+export const addComment =  (postId, formData) => async (dispatch) => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        const res = await axios.post(`/api/posts/comment/${postId}`, formData,  config);
+        dispatch({
+            type: ADD_COMMENT,
+            payload: res.data
+        });
+        dispatch(setAlert(  'Comment created', 'success'));
+
+    } catch (err) {
+        const errors = err.response.data.errors;
+
+        if (errors) {
+            errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+        }
+        dispatch({
+            type: POST_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status}
+        });
+    }
+};
+
+
+// Delete comment
+export const deleteComment =  (postId, commentId) => async (dispatch) => {
+    try {
+        const res = await axios.delete(`/api/posts/comment/${postId}/${commentId}`);
+        dispatch({
+            type: REMOVE_COMMENT,
+            payload: commentId
+        });
+        dispatch(setAlert(  'Comment removed', 'success'));
+
+    } catch (err) {
+        const errors = err.response.data.errors;
+
+        if (errors) {
+            errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+        }
+        dispatch({
+            type: POST_ERROR,
             payload: { msg: err.response.statusText, status: err.response.status}
         });
     }

@@ -17,6 +17,8 @@ const Profile = ({
                      auth,
                      getProfileById
                  }) => {
+
+
     const { id } = useParams();
     useEffect(() => {
         getProfileById(id);
