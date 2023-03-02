@@ -1,6 +1,5 @@
-import React, { Fragment, useEffect } from 'react';
-import {BrowserRouter as Router, Link, Route, Routes} from 'react-router-dom';
-
+import React, { useEffect } from 'react';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -21,6 +20,7 @@ import AddExperience from "./Components/profile-forms/AddExperience";
 import AddEducation from "./Components/profile-forms/AddEducation";
 import Profiles from "./Components/profiles/Profiles";
 import Profile from "./Components/profile/Profile";
+import Posts from "./Components/posts/Posts";
 
 if (localStorage.token) {
     setAuthToken(localStorage.token);
@@ -42,11 +42,6 @@ const App = () => {
                     <Route exact path='/login' element={<Login/>} />
                     <Route exact path='/profiles' element={<Profiles/>} />
                     <Route exact path='/profile/:id' element={<Profile/>} />
-                    {/*<Route exact path='/dashboard' element={<Dashboard/>} />*/}
-                    {/*<Route exact path='/create-profile' element={<CreateProfile/>} />*/}
-                    {/*<Route exact path='/edit-profile' element={<EditProfile/>} />*/}
-                    {/*<Route exact path='/add-experience' element={<AddExperience/>} />*/}
-                    {/*<Route exact path='/add-education' element={<AddEducation/>} />*/}
                     <Route
                         path="/dashboard"
                         element={<PrivateRoute component={Dashboard} />}
@@ -66,6 +61,10 @@ const App = () => {
                     <Route
                         path='/add-education'
                         element={<PrivateRoute component={AddEducation} />}
+                    />
+                    <Route
+                        path='/posts'
+                        element={<PrivateRoute component={Posts} />}
                     />
                 </Routes>
             </Router>
