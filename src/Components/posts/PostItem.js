@@ -6,11 +6,10 @@ import {connect} from "react-redux";
 import { addLike, removeLike, deletePost } from '../../actions/post'
 
 
-const PostItem = ({auth, post : {_id, name, text, avatar, date, user, likes, comments}, addLike, removeLike, deletePost}) => {
+export const PostItem = ({auth, post : {_id, name, text, avatar, date, user, likes, comments}, addLike, removeLike, deletePost, showActions}) => {
 
 
     return (
-
         <Fragment>
             <div className="post bg-white p-1 my-1">
                 <div>
@@ -30,7 +29,7 @@ const PostItem = ({auth, post : {_id, name, text, avatar, date, user, likes, com
                     <p className="post-date">
                         Posted on <Moment format='YYYY/MM/DD'>{date}</Moment>
                     </p>
-
+                    {showActions && <Fragment>
                     <button onClick={e => addLike(_id)} type="button" className="btn btn-light"><i
                         className="fas fa-thumbs-up"/>{' '} <span> {likes && likes.length > 0 && (
                         <span>{likes.length}</span>)} </span>
@@ -38,7 +37,7 @@ const PostItem = ({auth, post : {_id, name, text, avatar, date, user, likes, com
                     <button onClick={e => removeLike(_id)} type="button" className="btn btn-light">
                         <i className="fas fa-thumbs-down"/>
                     </button>
-                    <Link to={`/post/${_id}`} className="btn btn-primary">
+                    <Link to={`/posts/${_id}`} className="btn btn-primary">
                         Discussion {comments && comments.length > 0 && (<span className='comment-count'>{comments.length}</span>)}
                     </Link>
                     {!auth.loading && user === auth.user._id && (
@@ -46,10 +45,15 @@ const PostItem = ({auth, post : {_id, name, text, avatar, date, user, likes, com
                             <i className="fas fa-times"/>
                         </button>
                     )}
+                    </Fragment>}
                 </div>
             </div>
         </Fragment>
     )
+};
+
+PostItem.defaultProps = {
+    showActions: true
 };
 
 PostItem.propTypes = {

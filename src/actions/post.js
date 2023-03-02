@@ -29,7 +29,7 @@ export const getPosts=  () => async (dispatch) => {
 };
 
 // Get post by id
-export const getPosById=  (id) => async (dispatch) => {
+export const getPost=  (id) => async (dispatch) => {
     try {
         const res = await axios.get(`/api/posts/${id}`);
         dispatch({

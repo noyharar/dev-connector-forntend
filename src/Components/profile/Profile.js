@@ -11,6 +11,7 @@ import ProfileExp from "./ProfileExp";
 import ProfileEdu from "./ProfileEdu";
 import ProfileGithub from "./ProfileGithub";
 
+
 const Profile = ({
                      profile: {profile},
                      auth,
