@@ -1,15 +1,12 @@
 import React, {Fragment, useEffect, useState} from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import { addComment, deleteComment } from '../../actions/post'
-import Spinner from "../layout/Spinner";
-import {Link} from "react-router-dom";
+import { addComment } from '../../actions/post'
+
 
 
 const CommentForm = ({ addComment, postId}) => {
     const [text, setText] = useState('');
-
-
     return (
         <div className="post-form">
             <div className="bg-primary p">

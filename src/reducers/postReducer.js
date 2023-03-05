@@ -33,10 +33,11 @@ function postReducer(state = initialState, action) {
                 posts: [payload, ...state.posts]
             };
         case ADD_COMMENT:
+            // const noy = [payload, ...state.post.comments];
             return{
                 ...state,
                 loading: false,
-                post: {...state.post, comments: [payload, ...state.post.comments]}
+                post: {...state.post, comments: payload}
             };
         case REMOVE_COMMENT:
             return{
